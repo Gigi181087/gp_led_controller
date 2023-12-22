@@ -1,5 +1,5 @@
-#ifndef _LED_H_
-#define _LED_H_
+#ifndef __GP_LED_CONTROLLER_H_
+#define __GP_LED_CONTROLLER_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,4 +35,4 @@ uint64_t gp_ledController_getStatus(gp_led_t*);
 }
 #endif
 
-#endif // _LED_H_
+#endif // __GP_LED_CONTROLLER_H_
