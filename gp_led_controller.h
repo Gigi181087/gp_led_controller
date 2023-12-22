@@ -17,7 +17,7 @@ extern "C" {
 
 
 
-typedef struct led_controller gp_led_t;
+typedef struct led_controller gp_led_controller_t;
 typedef enum led_modes {
   ON = 0,
   OFF = 1,
