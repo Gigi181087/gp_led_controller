@@ -24,11 +24,11 @@ typedef enum led_modes {
   BLINKING = 2
 } gp_led_modes_t;
 
-uint8_t gp_ledController_init(gp_led_controller_t**, void(*)(uint8_t));
-uint8_t gp_ledController_setOff(gp_led_controller_t*);
-uint8_t gp_ledController_setOn(gp_led_controller_t*);
-uint8_t gp_ledController_setBlinking(gp_led_controller_t*, uint16_t);
-uint8_t gp_ledController_handle(gp_led_controller_t*, uint64_t);
+uint8_t gp_led_controller_init(gp_led_controller_t**, void(*)(uint8_t));
+uint8_t gp_led_controller_setOff(gp_led_controller_t*);
+uint8_t gp_led_controller_setOn(gp_led_controller_t*);
+uint8_t gp_led_controller_setBlinking(gp_led_controller_t*, uint16_t);
+uint8_t gp_led_controller_handle(gp_led_controller_t*, uint64_t);
 
 #ifdef __cplusplus
 }
