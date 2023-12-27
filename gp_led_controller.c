@@ -1,5 +1,6 @@
-#include "LED.h"
+#include "gp_led_controller.h"
 #include <stdlib.h>
+#include <malloc.h>
 
 #define __assertinitialized(x) do{ if(x == NULL) {last_error = GP_LEDCONTROLLER_ERROR_NOTINITIALIZED; return GP_LEDCONTROLLER_ERROR_NOTINITIALIZED;}} while(0)
 #define __assertnotinitialized(x) do{ if(x != NULL) { last_error = GP_LEDCONTROLLER_ERROR_ALREADYINITIALIZED; return GP_LEDCONTROLLER_ERROR_ALREADYINITIALIZED; }} while(0)
@@ -15,10 +16,10 @@ struct led_controller {
 
 uint8_t last_error;
 
-uint8_t gp_ledController_init(gp_led_t** led_param, void(*led_function)(uint8_t)) {
+uint8_t gp_ledController_init(gp_led_controller_t** led_param, void(*led_function)(uint8_t)) {
   //__assertnotinitialized(led_param);
 
-  if((*led_param = (gp_led_t*)malloc(sizeof(gp_led_t))) == NULL) {
+  if((*led_param = (gp_led_controller_t*)malloc(sizeof(gp_led_controller_t))) == NULL) {
 
     return GP_LEDCONTROLLER_ERROR_ALLOCFAILED;
   }
@@ -31,7 +32,7 @@ uint8_t gp_ledController_init(gp_led_t** led_param, void(*led_function)(uint8_t)
   return GP_LEDCONTROLLER_ERROR_NOERROR;
 }
 
-uint8_t gp_ledController_setOn(gp_led_t* led_param) {
+uint8_t gp_ledController_setOn(gp_led_controller_t* led_param) {
   __assertinitialized(led_param);
 
   led_param->mode = 1;
@@ -41,7 +42,7 @@ uint8_t gp_ledController_setOn(gp_led_t* led_param) {
   return GP_LEDCONTROLLER_ERROR_NOERROR;
 }
 
-uint8_t gp_ledController_setOff(gp_led_t* led_param) {
+uint8_t gp_ledController_setOff(gp_led_controller_t* led_param) {
   __assertinitialized(led_param);
 
   led_param->mode = 0;
@@ -51,7 +52,7 @@ uint8_t gp_ledController_setOff(gp_led_t* led_param) {
   return GP_LEDCONTROLLER_ERROR_NOERROR;
 }
 
-uint8_t gp_ledController_setBlinking(gp_led_t* led_param, uint16_t frequency_param) {
+uint8_t gp_ledController_setBlinking(gp_led_controller_t* led_param, uint16_t frequency_param) {
   __assertinitialized(led_param);
 
   led_param->mode = 2;
@@ -60,7 +61,7 @@ uint8_t gp_ledController_setBlinking(gp_led_t* led_param, uint16_t frequency_par
   return GP_LEDCONTROLLER_ERROR_NOERROR;
 }
 
-uint8_t gp_ledController_handle(gp_led_t* led_param, uint64_t system_time_param) {
+uint8_t gp_ledController_handle(gp_led_controller_t* led_param, uint64_t system_time_param) {
   __assertinitialized(led_param);
 
   if(led_param->mode == 2) {
@@ -84,7 +85,7 @@ uint8_t gp_ledController_handle(gp_led_t* led_param, uint64_t system_time_param)
   return GP_LEDCONTROLLER_ERROR_NOERROR;
 }
 
-uint64_t gp_ledController_getStatus(gp_led_t* led_param) {
+uint64_t gp_ledController_getStatus(gp_led_controller_t* led_param) {
     
     return led_param->next_step;
 
