@@ -54,6 +54,11 @@ uint8_t gp_led_controller_setOff(gp_led_controller_t* led_param) {
 
 uint8_t gp_led_controller_setBlinking(gp_led_controller_t* led_param, uint16_t frequency_param) {
   __assertinitialized(led_param);
+  
+  if (frequency_param == 0) {
+
+    return GP_LED_CONTROLLER_ERRORS_FREQUENCY;
+  }
 
   led_param->mode = 2;
   led_param->frequency = frequency_param;
@@ -64,17 +69,15 @@ uint8_t gp_led_controller_setBlinking(gp_led_controller_t* led_param, uint16_t f
 uint8_t gp_led_controller_handle(gp_led_controller_t* led_param, uint64_t system_time_param) {
   __assertinitialized(led_param);
 
-  if(led_param->mode == 2) {
+  if (led_param->mode == 2) {
 
-    if(system_time_param >= led_param->next_step) {
+    if (system_time_param >= led_param->next_step) {
       led_param->current_state ^= 0x1;
       led_param->led_set(led_param->current_state);
 
       while(system_time_param >= led_param->next_step) {
         led_param->next_step += (1000 / led_param->frequency);
-      }
-      
-    
+      }    
     }
 
   } else if(led_param->mode != led_param->current_state) {
