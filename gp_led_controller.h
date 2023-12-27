@@ -29,7 +29,6 @@ uint8_t gp_ledController_setOff(gp_led_controller_t*);
 uint8_t gp_ledController_setOn(gp_led_controller_t*);
 uint8_t gp_ledController_setBlinking(gp_led_controller_t*, uint16_t);
 uint8_t gp_ledController_handle(gp_led_controller_t*, uint64_t);
-uint64_t gp_ledController_getStatus(gp_led_controller_t*);
 
 #ifdef __cplusplus
 }

@@ -84,10 +84,3 @@ uint8_t gp_ledController_handle(gp_led_controller_t* led_param, uint64_t system_
 
   return GP_LEDCONTROLLER_ERROR_NOERROR;
 }
-
-uint64_t gp_ledController_getStatus(gp_led_controller_t* led_param) {
-    
-    return led_param->next_step;
-
-
-}
